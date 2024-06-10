@@ -3,33 +3,36 @@
 Official Code for [CVPR Workshop2024] Paper *"COVER: A Comprehensive Video Quality Evaluator"*. 
 Official Code, Demo, Weights for the [Comprehensive Video Quality Evaluator (COVER)].
 
-# Todo:: update date, hugging face model below
-- xx xxx, 2024: We upload weights of [COVER](https://github.com/vztu/COVER/release/Model/COVER.pth) and [COVER++](TobeContinue) to Hugging Face models.
-- xx xxx, 2024: We upload Code of [COVER](https://github.com/vztu/COVER)
+- 29 May, 2024: We create a space for [COVER](https://huggingface.co/spaces/Sorakado/COVER) on Hugging Face.
+- 09 May, 2024: We upload Code of [COVER](https://github.com/vztu/COVER).
 - 12 Apr, 2024: COVER has been accepted by CVPR Workshop2024.
 
-
-# Todo:: update [visitors](link) below
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=teowu/TobeContinue) [![](https://img.shields.io/github/stars/vztu/COVER)](https://github.com/vztu/COVER)
-[![State-of-the-Art](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/QualityAssessment/COVER)
-<a href="https://colab.research.google.com/github/taskswithcode/COVER/blob/master/TWCCOVER.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a> 
-
-
-# Todo:: update predicted score for YT-UGC challenge dataset specified by AIS
-**COVER** Pseudo-labelled Quality scores of [YT-UGC](https://www.deepmind.com/open-source/kinetics): [CSV](https://github.com/QualityAssessment/COVER/raw/master/cover_predictions/kinetics_400_1.csv)
-
-
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/disentangling-aesthetic-and-technical-effects/video-quality-assessment-on-youtube-ugc)](https://paperswithcode.com/sota/video-quality-assessment-on-youtube-ugc?p=disentangling-aesthetic-and-technical-effects)
-
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=vztu/COVER) [![](https://img.shields.io/github/stars/vztu/COVER)](https://github.com/vztu/COVER)
+[![State-of-the-Art](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vztu/COVER)
+<a href="https://huggingface.co/spaces/Sorakado/COVER"><img src="./figs/deploy-on-spaces-md-dark.svg" alt="hugging face log"></a> 
 
 ## Introduction
-#  Todo:: Add Introduction here
+- Existing UGC VQA models strive to quantify quality degradation mainly from technical aspect, with a few considering aesthetic or semantic aspects, but no model has addressed all three aspects simultaneously.
+- The demand for high-resolution and high-frame-rate videos on social media platforms presents new challenges for VQA tasks, as they must ensure effectiveness while also meeting real-time requirements.
 
-### the proposed COVER
+## the proposed COVER
 
-*This inspires us to*
+*This inspires us to develop comprehensive and efficient model for UGC VQA task*
 
-![Fig](figs/approach.png)
+![Fig](./figs/approach.jpg)
+
+### COVER
+
+Results comparison:
+|  Dataset: YT-UGC    | SROCC | KROCC | PLCC | RMSE | Run Time  |
+| ----  |    ----   |   ----  |      ----     |   ----  | ---- |
+| [**COVER**](https://github.com/vztu/COVER/release/Model/COVER.pth) | 0.9143 | 0.7413 | 0.9122 | 0.2519 | 79.37ms |
+| TVQE (Wang *et al*, CVPRWS 2024) | 0.9150 | 0.7410 | 0.9182 | ------- | 705.30ms |
+| Q-Align (Zhang *et al, CVPRWS 2024) | 0.9080 | 0.7340 | 0.9120 | ------- | 1707.06ms |
+| SimpleVQA+ (Sun *et al, CVPRWS 2024) | 0.9060 | 0.7280 | 0.9110 | ------- | 245.51ms |
+
+The run time is measured on an NVIDIA A100 GPU. A clip
+of 30 frames of 4K resolution 3840×2160 is used as input.
 
 ## Install
 
@@ -69,15 +72,13 @@ Or choose any video you like to predict its quality:
 
 ### Outputs
 
-#### ITU-Standarized Overall Video Quality Score
-
 The script can directly score the video's overall quality (considering all perspectives).
 
 ```shell
     python evaluate_one_video.py -v $YOUR_SPECIFIED_VIDEO_PATH$
 ```
 
-The final output score is averaged among all perspectives.
+The final output score is the sum of all perspectives.
 
 
 ## Evaluate on a Exsiting Video Dataset
@@ -120,8 +121,6 @@ After downloading, kindly put them under the `../datasets` or anywhere but remem
 
 Now you can employ ***head-only/end-to-end transfer*** of COVER to get dataset-specific VQA prediction heads. 
 
-We still recommend **head-only** transfer. As we have evaluated in the paper, this method has very similar performance with *end-to-end transfer* (usually 1%~2% difference), but will require **much less** GPU memory, as follows:
-
 ```shell
     python transfer_learning.py -t $YOUR_SPECIFIED_DATASET_NAME$
 ```
@@ -133,13 +132,9 @@ For existing public datasets, type the following commands for respective ones:
 - `python transfer_learning.py -t val-cvd2014` for CVD2014.
 - `python transfer_learning.py -t val-livevqc` for LIVE-VQC.
 
-
-As the backbone will not be updated here, the checkpoint saving process will only save the regression heads with only `398KB` file size (compared with `200+MB` size of the full model). To use it, simply replace the head weights with the official weights [COVER.pth](https://github.com/vztu/COVER/release/Model/COVER.pth).
+As the backbone will not be updated here, the checkpoint saving process will only save the regression heads. To use it, simply replace the head weights with the official weights [COVER.pth](https://github.com/vztu/COVER/release/Model/COVER.pth).
 
 We also support ***end-to-end*** fine-tune right now (by modifying the `num_epochs: 0` to `num_epochs: 15` in `./cover.yml`). It will require more memory cost and more storage cost for the weights (with full parameters) saved, but will result in optimal accuracy.
-
-Fine-tuning curves by authors can be found here: [Official Curves](https://wandb.ai/timothyhwu/COVER) for reference.
-
 
 ## Visualization
 
@@ -155,9 +150,21 @@ Thanks for every participant of the subjective studies!
 
 Should you find our work interesting and would like to cite it, please feel free to add these in your references! 
 
-
-# Todo, add bibtex of cover below
 ```bibtex
-%cover
+%AIS 2024 VQA challenge
+@article{conde2024ais,
+  title={AIS 2024 challenge on video quality assessment of user-generated content: Methods and results},
+  author={Conde, Marcos V and Zadtootaghaj, Saman and Barman, Nabajeet and Timofte, Radu and He, Chenlong and Zheng, Qi and Zhu, Ruoxi and Tu, Zhengzhong and Wang, Haiqiang and Chen, Xiangguang and others},
+  journal={arXiv preprint arXiv:2404.16205},
+  year={2024}
+}
 
+%cover
+@article{cover2024cpvrws,
+  title={COVER: A comprehensive video quality evaluator},
+  author={Chenlong, He and Qi, Zheng and Ruoxi, Zhu and Xiaoyang, Zeng and
+Yibo, Fan and Zhengzhong, Tu},
+  journal={In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops},
+  year={2024}
+}
 ```
