@@ -1,7 +1,9 @@
-# COVER
+# 🏆 [CVPRW 2024] [COVER](https://openaccess.thecvf.com/content/CVPR2024W/AI4Streaming/papers/He_COVER_A_Comprehensive_Video_Quality_Evaluator_CVPRW_2024_paper.pdf): A Comprehensive Video Quality Evaluator. 
 
-Official Code for [CVPR Workshop2024] Paper *"COVER: A Comprehensive Video Quality Evaluator"*. 
-Official Code, Demo, Weights for the [Comprehensive Video Quality Evaluator (COVER)].
+🏆 🥇 **Winner solution for [Video Quality Assessment Challenge](https://codalab.lisn.upsaclay.fr/competitions/17340) at the 1st [AIS 2024](https://ai4streaming-workshop.github.io/) workshop @ CVPR 2024** 
+
+Official Code for [CVPR Workshop 2024] Paper *"COVER: A Comprehensive Video Quality Evaluator"*. 
+Official Code, Demo, Weights for the [Comprehensive Video Quality Evaluator (COVER)](https://openaccess.thecvf.com/content/CVPR2024W/AI4Streaming/papers/He_COVER_A_Comprehensive_Video_Quality_Evaluator_CVPRW_2024_paper.pdf).
 
 - 29 May, 2024: We create a space for [COVER](https://huggingface.co/spaces/Sorakado/COVER) on Hugging Face.
 - 09 May, 2024: We upload Code of [COVER](https://github.com/vztu/COVER).
