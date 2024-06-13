@@ -11,7 +11,7 @@ Official Code, Demo, Weights for the [Comprehensive Video Quality Evaluator (COV
 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=vztu/COVER) [![](https://img.shields.io/github/stars/vztu/COVER)](https://github.com/vztu/COVER)
 [![State-of-the-Art](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vztu/COVER)
-<a href="https://huggingface.co/spaces/Sorakado/COVER"><img src="./figs/deploy-on-spaces-sm-dark.svg" alt="hugging face log"></a> 
+<a href="https://huggingface.co/spaces/vztu/COVER"><img src="./figs/deploy-on-spaces-sm-dark.svg" alt="hugging face log"></a> 
 
 ## Introduction
 - Existing UGC VQA models strive to quantify quality degradation mainly from technical aspect, with a few considering aesthetic or semantic aspects, but no model has addressed all three aspects simultaneously.
