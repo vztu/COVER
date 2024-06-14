@@ -35,7 +35,7 @@ We use the semantic branch to gate the other two branches to conduct feature int
 | TVQE (Wang *et al*, CVPRWS 2024) | 0.9150 | 0.7410 | 0.9182 | ------- | 705.30ms |
 | Q-Align (Zhang *et al, CVPRWS 2024) | 0.9080 | 0.7340 | 0.9120 | ------- | 1707.06ms |
 | SimpleVQA+ (Sun *et al, CVPRWS 2024) | 0.9060 | 0.7280 | 0.9110 | ------- | 245.51ms |
-| [**COVER**](https://github.com/vztu/COVER/release/Model/COVER.pth) | 0.9143 | 0.7413 | 0.9122 | 0.2519 | 79.37ms |
+| [**COVER**](https://github.com/vztu/COVER/blob/release/Model/COVER.pth) | 0.9143 | 0.7413 | 0.9122 | 0.2519 | 79.37ms |
 
 * The run time is measured on an NVIDIA A100 GPU. A clip of 30 frames of 4K resolution 3840×2160 is used as input.
 * Inference time break-down is:
