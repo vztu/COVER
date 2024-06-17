@@ -248,11 +248,12 @@ Should you find our work interesting and would like to cite it, please feel free
 }
 
 %cover
-@article{cover2024cpvrws,
-  title={COVER: A comprehensive video quality evaluator},
-  author={Chenlong, He and Qi, Zheng and Ruoxi, Zhu and Xiaoyang, Zeng and
-Yibo, Fan and Zhengzhong, Tu},
-  journal={In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops},
-  year={2024}
+@InProceedings{cover2024cpvrws,
+    author    = {He, Chenlong and Zheng, Qi and Zhu, Ruoxi and Zeng, Xiaoyang and Fan, Yibo and Tu, Zhengzhong},
+    title     = {COVER: A Comprehensive Video Quality Evaluator},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2024},
+    pages     = {5799-5809}
 }
 ```
