@@ -131,7 +131,7 @@ cd COVER
 pip install -e . 
 mkdir pretrained_weights 
 cd pretrained_weights 
-wget https://github.com/vztu/COVER/release/Model/COVER.pth
+wget https://github.com/vztu/COVER/blob/release/Model/COVER.pth
 cd ..
 ```
 
@@ -220,7 +220,7 @@ For existing public datasets, type the following commands for respective ones:
 - `python transfer_learning.py -t val-cvd2014` for CVD2014.
 - `python transfer_learning.py -t val-livevqc` for LIVE-VQC.
 
-As the backbone will not be updated here, the checkpoint saving process will only save the regression heads. To use it, simply replace the head weights with the official weights [COVER.pth](https://github.com/vztu/COVER/release/Model/COVER.pth).
+As the backbone will not be updated here, the checkpoint saving process will only save the regression heads. To use it, simply replace the head weights with the official weights [COVER.pth](https://github.com/vztu/COVER/blob/release/Model/COVER.pth).
 
 We also support ***end-to-end*** fine-tune right now (by modifying the `num_epochs: 0` to `num_epochs: 15` in `./cover.yml`). It will require more memory cost and more storage cost for the weights (with full parameters) saved, but will result in optimal accuracy.
 
