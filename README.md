@@ -5,13 +5,17 @@
 Official Code for [CVPR Workshop 2024] Paper *"COVER: A Comprehensive Video Quality Evaluator"*. 
 Official Code, Demo, Weights for the [Comprehensive Video Quality Evaluator (COVER)](https://openaccess.thecvf.com/content/CVPR2024W/AI4Streaming/papers/He_COVER_A_Comprehensive_Video_Quality_Evaluator_CVPRW_2024_paper.pdf).
 
+- 17 June 2024: We presented our solution in the AIS 2024 workshop in CVPR 2024! See the photo [here](https://github.com/vztu/COVER/blob/main/figs/_DSF6163-Enhanced-NR.JPG).
 - 29 May 2024: We create a space for [COVER](https://huggingface.co/spaces/vztu/COVER) on Hugging Face, with ZeroGPU enabled!
 - 09 May 2024: We upload the Code of [COVER](https://github.com/vztu/COVER).
 - 12 Apr 2024: COVER has been accepted by CVPR Workshop2024.
 
+[![Paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://openaccess.thecvf.com/content/CVPR2024W/AI4Streaming/html/He_COVER_A_Comprehensive_Video_Quality_Evaluator_CVPRW_2024_paper.html)
+[![slides](https://img.shields.io/badge/Presentation-Slides-B762C1)](https://docs.google.com/presentation/d/18AcozoBEGj1l6qMTBxu0DoxCMin9JkeUMoSOHWP02jE/edit?usp=sharing)
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=vztu/COVER) [![](https://img.shields.io/github/stars/vztu/COVER)](https://github.com/vztu/COVER)
 [![State-of-the-Art](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vztu/COVER)
 <a href="https://huggingface.co/spaces/vztu/COVER"><img src="./figs/deploy-on-spaces-sm-dark.svg" alt="hugging face log"></a> 
+
 
 ## Introduction
 - Existing UGC VQA models strive to quantify quality degradation mainly from the technical aspect, with a few considering aesthetic or semantic aspects, but no model has addressed all three aspects simultaneously.
