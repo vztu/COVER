@@ -12,6 +12,7 @@ import skvideo.io
 import torch
 import torchvision
 from decord import VideoReader, cpu, gpu
+from PIL import Image
 from tqdm import tqdm
 
 random.seed(42)
@@ -243,7 +244,7 @@ def spatial_temporal_view_decomposition(
             imgs = [torch.from_numpy(ovideo[idx]) for idx in frame_inds]
             video[stype] = torch.stack(imgs, 0).permute(3, 0, 1, 2)
         del ovideo
-    else:
+    elif video_path.endswith(".mp4"):
         decord.bridge.set_bridge("torch")
         vreader = VideoReader(video_path)
         ### Avoid duplicated video decoding!!! Important!!!!
@@ -260,6 +261,14 @@ def spatial_temporal_view_decomposition(
         for stype in samplers:
             imgs = [frame_dict[idx] for idx in frame_inds[stype]]
             video[stype] = torch.stack(imgs, 0).permute(3, 0, 1, 2)
+    else:
+        ireader = Image.open(video_path).convert("RGB")
+        img = torch.tensor(np.array(ireader)).permute(2, 0, 1)
+
+        frame_inds = {}
+        for stype in samplers:
+            frame_inds[stype] = np.array([0])
+            video[stype] = torch.unsqueeze(img, dim=1)
 
     sampled_video = {}
     for stype, sopt in sample_types.items():

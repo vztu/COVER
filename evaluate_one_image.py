@@ -34,7 +34,7 @@ def fuse_results(results: list):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-o", "--opt"   , type=str, default="./cover.yml", help="the option file")
-    parser.add_argument("-v", "--video_path", type=str, default="./demo/video_1.mp4" , help='output file to store predict mos value')
+    parser.add_argument("-i", "--image_path", type=str, default="./demo/image_1.jpg" , help='output file to store predict mos value')
     args = parser.parse_args()
     return args
 
@@ -53,8 +53,14 @@ if __name__ == "__main__":
        opt = yaml.safe_load(f)
     
     dopt = opt["data"]["val-ytugc"]["args"]
+    # for image, set clip_len, t_frag, num_clips and aligned to 1
     temporal_samplers = {}
     for stype, sopt in dopt["sample_types"].items():
+        sopt["clip_len"] = 1
+        sopt["t_frag"] = 1
+        sopt["num_clips"] = 1
+        if stype == "technical":
+            sopt["aligned"] = 1
         temporal_samplers[stype] = UnifiedFrameSampler(
             sopt["clip_len"] // sopt["t_frag"],
             sopt["t_frag"],
@@ -76,7 +82,7 @@ if __name__ == "__main__":
     TESTING
     """
     views, _ = spatial_temporal_view_decomposition(
-        args.video_path, dopt["sample_types"], temporal_samplers
+        args.image_path, dopt["sample_types"], temporal_samplers
     )
 
     for k, v in views.items():
@@ -101,5 +107,5 @@ if __name__ == "__main__":
     results = [r.mean().item() for r in evaluator(views)]
     pred_score = fuse_results(results)
     print(f"path, semantic score, technical score, aesthetic score, overall/final score")
-    print(f'{args.video_path.split("/")[-1]},{pred_score["semantic"]:4f},{pred_score["technical"]:4f},{pred_score["aesthetic"]:4f},{pred_score["overall"]:4f}')
+    print(f'{args.image_path.split("/")[-1]},{pred_score["semantic"]:4f},{pred_score["technical"]:4f},{pred_score["aesthetic"]:4f},{pred_score["overall"]:4f}')
 

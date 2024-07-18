@@ -140,13 +140,13 @@ cd ..
 ```
 
 
-## Evaluation: Judge the Quality of Any Video
+## Evaluation: Judge the Quality of Any Image and Video
 
 ### Try on Demos
 You can run a single command to judge the quality of the demo videos in comparison with videos in VQA datasets. 
 
 ```shell
-    python evaluate_one_video.py -v ./demo/video_1.mp4
+    python evaluate_one_image.py -i ./demo/image_1.mp4
 ```
 
 or 

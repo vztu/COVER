@@ -130,8 +130,13 @@ class COVER(nn.Module):
                 feats = {}
                 for key in vclips:
                     if key == 'technical' or key == 'aesthetic':
+                        # if input is image, copy its data
+                        if vclips[key].shape[2] == 1:
+                            x = torch.cat([vclips[key], vclips[key]], dim=2)
+                        else:
+                            x = vclips[key]
                         feat = getattr(self, key.split("_")[0] + "_backbone")(
-                            vclips[key], multi=self.multi, layer=self.layer, **kwargs
+                            x, multi=self.multi, layer=self.layer, **kwargs
                         )
                         if key == 'technical':
                             feat_gated = self.smtc_gate_tech(feats['semantic'], feat)
@@ -142,8 +147,8 @@ class COVER(nn.Module):
                         else:
                             scores += [getattr(self, "vqa_head")(feat_gated)]
                     elif key == 'semantic':
-                        x = vclips[key].squeeze()
-                        x =  x.permute(1,0,2,3)
+                        x = vclips[key].squeeze(0)
+                        x = x.permute(1,0,2,3)
                         feat, _ = getattr(self, key.split("_")[0] + "_backbone")(
                             x, multi=self.multi, layer=self.layer, **kwargs
                         )
@@ -176,8 +181,13 @@ class COVER(nn.Module):
             feats = {}
             for key in vclips:
                 if key == 'technical' or key == 'aesthetic':
+                    # if input is image, copy its data
+                    if vclips[key].shape[2] == 1:
+                        x = torch.cat([vclips[key], vclips[key]], dim=2)
+                    else:
+                        x = vclips[key]
                     feat = getattr(self, key.split("_")[0] + "_backbone")(
-                        vclips[key], multi=self.multi, layer=self.layer, **kwargs
+                        x, multi=self.multi, layer=self.layer, **kwargs
                     )
                     if key == 'technical':
                         feat_gated = self.smtc_gate_tech(feats['semantic'], feat)
@@ -192,7 +202,7 @@ class COVER(nn.Module):
                     scores_semantic_list = []
                     feats_semantic_list = []
                     for batch_idx in range(vclips[key].shape[0]):
-                        x = vclips[key][batch_idx].squeeze()
+                        x = vclips[key][batch_idx].squeeze(0)
                         x =  x.permute(1,0,2,3)
                         feat, _ = getattr(self, key.split("_")[0] + "_backbone")(
                             x, multi=self.multi, layer=self.layer, **kwargs
