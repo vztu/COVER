@@ -184,7 +184,7 @@ class SampleFrames:
             ratio = (num_frames - ori_clip_len + 1.0) / self.num_clips
             clip_offsets = np.around(np.arange(self.num_clips) * ratio)
         else:
-            clip_offsets = np.zeros((self.num_clips,), dtype=np.int)
+            clip_offsets = np.zeros((self.num_clips,), dtype=int)
         return clip_offsets
 
     def _get_test_clips(self, num_frames, start_index=0):
